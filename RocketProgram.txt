@@ -1,0 +1,232 @@
+#include <SoftwareSerial.h>
+
+//declaring variables
+int bluetoothTX = 2;
+int bluetoothRX = 3;
+const int rocketOne = 12;
+const int rocketTwo = 11;
+const int rocketThree = 10;
+const int rocketFour = 9;
+const int rocketFive = 8;
+
+//setup serial connections
+SoftwareSerial bluetooth(bluetoothTX, bluetoothRX);
+
+void setup ()
+{
+  //Setup MOSFET Gates
+  pinMode (rocketOne, OUTPUT);
+  pinMode (rocketTwo, OUTPUT);
+  pinMode (rocketThree, OUTPUT);
+  pinMode (rocketFour, OUTPUT);
+  pinMode (rocketFive, OUTPUT);
+  
+  //Setup Bluetooth Serial connection to android
+  bluetooth.begin (9600);
+  while(!bluetooth.available());
+  displayMenu();
+}
+void loop()
+{
+  // Check if there is a bluetooth connection
+  if (bluetooth.available());
+  {
+        //Assigning character input from android to variable
+	//signalOne.
+    char signalOne = (char)bluetooth.read();
+	
+       // Rocket One    
+    if (signalOne == '1') {
+      bluetooth.println("Firing Rocket One In:");
+      delay (1000);
+      bluetooth.println("5");
+      delay (1000);
+      bluetooth.println("4");
+      delay (1000);
+      bluetooth.println("3");
+      delay (1000);
+      bluetooth.println("2");
+      delay (1000);
+      bluetooth.println("1");
+      delay (1000);
+      bluetooth.println("Ignition!");
+      digitalWrite (rocketOne, HIGH);
+      delay (3000);
+      digitalWrite (rocketOne, LOW);
+      bluetooth.println("--End Firing Sequence--");
+    }
+	// Rocket Two
+    if (signalOne == '2') {
+      bluetooth.println("Firing Rocket Two In:");
+      delay (1000);
+      bluetooth.println("5");
+      delay (1000);
+      bluetooth.println("4");
+      delay (1000);
+      bluetooth.println("3");
+      delay (1000);
+      bluetooth.println("2");
+      delay (1000);
+      bluetooth.println("1");
+      delay (1000);
+      bluetooth.println("Ignition!");
+      digitalWrite (rocketTwo, HIGH);
+      delay (3000);
+      digitalWrite (rocketTwo, LOW);
+      bluetooth.println("--End Firing Sequence--");
+    }
+	// Rocket Three
+    if (signalOne == '3') {
+      bluetooth.println("Firing Rocket Three In:");
+      delay (1000);
+      bluetooth.println("5");
+      delay (1000);
+      bluetooth.println("4");
+      delay (1000);
+      bluetooth.println("3");
+      delay (1000);
+      bluetooth.println("2");
+      delay (1000);
+      bluetooth.println("1");
+      delay (1000);
+      bluetooth.println("Ignition!");
+      digitalWrite (rocketThree, HIGH);
+      delay (3000);
+      digitalWrite (rocketThree, LOW);
+      bluetooth.println("--End Firing Sequence--");
+    }
+	// Rocket Four
+    if (signalOne == '4') {
+      bluetooth.println("Firing Rocket Four In:");
+      delay (1000);
+      bluetooth.println("5");
+      delay (1000);
+      bluetooth.println("4");
+      delay (1000);
+      bluetooth.println("3");
+      delay (1000);
+      bluetooth.println("2");
+      delay (1000);
+      bluetooth.println("1");
+      delay (1000);
+      bluetooth.println("Ignition!");
+      digitalWrite (rocketFour, HIGH);
+      delay (3000);
+      digitalWrite (rocketFour, LOW);
+      bluetooth.println("--End Firing Sequence--");
+    }
+	// Rocket Five
+    if (signalOne == '5') {
+      bluetooth.println("Firing Rocket Five In:");
+      delay (1000);
+      bluetooth.println("5");
+      delay (1000);
+      bluetooth.println("4");
+      delay (1000);
+      bluetooth.println("3");
+      delay (1000);
+      bluetooth.println("2");
+      delay (1000);
+      bluetooth.println("1");
+      delay (1000);
+      bluetooth.println("Ignition!");
+      digitalWrite (rocketFive, HIGH);
+      delay (3000);
+      digitalWrite (rocketFive, LOW);
+      bluetooth.println("--End Firing Sequence--");
+    }
+	// Firing Sequence One - All
+    if (signalOne == '6') {
+      bluetooth.println("Firing All Rockets In:");
+      delay (1000);
+      bluetooth.println("5");
+      delay (1000);
+      bluetooth.println("4");
+      delay (1000);
+      bluetooth.println("3");
+      delay (1000);
+      bluetooth.println("2");
+      delay (1000);
+      bluetooth.println("1");
+      delay (1000);
+      bluetooth.println("Ignition!");
+      digitalWrite (rocketOne, HIGH);
+      digitalWrite (rocketTwo, HIGH);
+      digitalWrite (rocketThree, HIGH);
+      digitalWrite (rocketFour, HIGH);
+      digitalWrite (rocketFive, HIGH);
+      delay (3000);
+      digitalWrite (rocketOne, LOW);
+      digitalWrite (rocketTwo, LOW);
+      digitalWrite (rocketThree, LOW);
+      digitalWrite (rocketFour, LOW);
+      digitalWrite (rocketFive, LOW);
+      bluetooth.println("--End Firing Sequence--");
+    }
+	// Firing Sequence One - Step Sequence
+    if (signalOne == '7') {
+      bluetooth.println("--Firing Rockets In Step--");
+      delay (1000);
+      bluetooth.println("Firing Rocket One");
+      digitalWrite (rocketOne, HIGH);
+      delay (3000);
+      bluetooth.println("Firing Rocket Two");
+      digitalWrite (rocketTwo, HIGH);
+      digitalWrite (rocketOne, LOW);
+      delay (3000);
+      bluetooth.println("Firing Rocket Three");
+      digitalWrite (rocketThree, HIGH);
+      digitalWrite (rocketTwo, LOW);
+      delay (3000);
+      bluetooth.println("Firing Rocket Four");
+      digitalWrite (rocketFour, HIGH);
+      digitalWrite (rocketThree, LOW);
+      delay (3000);
+      bluetooth.println("Firing Rocket Five");
+      digitalWrite (rocketFive, HIGH);
+      digitalWrite (rocketFour, LOW);
+      delay (3000);
+      digitalWrite (rocketFive, LOW);
+      bluetooth.println("--End Firing Sequence--");
+    }
+        // Firing Sequence One - Step Sequence
+    if (signalOne == '8') {
+      bluetooth.println("--Firing Rocket Sequence Three--");
+      delay (1000);
+      bluetooth.println("Firing Outer Rockets One and Five");
+      digitalWrite (rocketOne, HIGH);
+      digitalWrite (rocketFive, HIGH);
+      delay (3000);
+      bluetooth.println("Firing Middle Rockets Two and Four");
+      digitalWrite (rocketTwo, HIGH);
+      digitalWrite (rocketFour, HIGH);
+      digitalWrite (rocketOne, LOW);
+      digitalWrite (rocketFive, LOW);
+      delay (3000);
+      bluetooth.println("Firing Center Rocket");
+      digitalWrite (rocketFive, HIGH);
+      digitalWrite (rocketTwo, LOW);
+      digitalWrite (rocketFour, LOW);
+      delay (3000);
+      digitalWrite (rocketFive, LOW);
+      bluetooth.println("--End Firing Sequence--");
+    }
+       // Displays Menu
+    if (signalOne == '9') {
+    displayMenu();
+    }
+  }
+}
+  void displayMenu() {
+  bluetooth.println("----------Rocket Ignition System----------");
+  bluetooth.println("- Press 1: Fires Rocket One              -");
+  bluetooth.println("- Press 2: Fires Rocket Two              -");
+  bluetooth.println("- Press 3: Fires Rocket Three            -");
+  bluetooth.println("- Press 4: Fires Rocket Four             -");
+  bluetooth.println("- Press 5: Fires Rocket Five             -");
+  bluetooth.println("- Press 6: Fires All Rockets @ Once      -");
+  bluetooth.println("- Press 7: Fires Rockets In Sequence     -");
+  bluetooth.println("- Press 8: Fires 1&5, 2&4, 3             -");
+  bluetooth.println("- Press 9: Menu                          -");
+  bluetooth.println("------------------------------------------");
+  }
